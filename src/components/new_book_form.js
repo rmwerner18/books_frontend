@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'
+import { addBook } from '../actions/books'
 
 class NewBookForm extends React.Component {
     state = {
@@ -30,4 +32,10 @@ class NewBookForm extends React.Component {
     }
 }
 
-export default NewBookForm
+const mapDispatchToProps = dispatch => {
+    return {
+        addBook: book => dispatch(addBook(book))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(NewBookForm)

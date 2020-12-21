@@ -1,5 +1,8 @@
 import './App.css';
 import NewBookForm from './components/new_book_form';
+import BooksContainer from './containers/books_container'
+// import { Provider } from 'react-redux'
+// import store from './store'
 
 function App() {
 
@@ -15,6 +18,7 @@ function App() {
   return (
     <div className="App">
       <NewBookForm/>
+      <BooksContainer books={[{name: 'book1'}, {name: 'book2'}]}/>
       <button onClick={makeCall}>clik here</button>
     </div>
   );
