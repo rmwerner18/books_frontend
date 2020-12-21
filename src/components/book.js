@@ -1,7 +1,5 @@
 import React from 'react'
 
-const Book = props => {
-    return 
-}
+const Book = props => <h1>{props.title}</h1>
 
-export default BooksContainer
+export default Book

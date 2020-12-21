@@ -17,7 +17,12 @@ class NewBookForm extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        this.props.addBook(this.state)
+        this.setState({
+            title: "",
+            author: "",
+            status: ""
+        })
     }
 
     render() {

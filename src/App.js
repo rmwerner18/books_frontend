@@ -15,10 +15,18 @@ function App() {
     .then(console.log)
   }
 
+  const books = () => {
+    return [
+      {name: "book1"},
+      {name: "book2"},
+      {name: "book3"}
+    ]
+  }
+
   return (
     <div className="App">
       <NewBookForm/>
-      <BooksContainer books={[{name: 'book1'}, {name: 'book2'}]}/>
+      <BooksContainer/>
       <button onClick={makeCall}>clik here</button>
     </div>
   );

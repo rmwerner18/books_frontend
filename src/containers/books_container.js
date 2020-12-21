@@ -1,13 +1,21 @@
 import React from 'react'
+import Book from '../components/book'
+import { connect } from 'react-redux'
 
 const BooksContainer = props => {
     let bookList = () => {
-        return props.books.forEach(book => {
-            return <h1>{book.name}</h1>
-        })
+        return props.books.map(book => <Book title={book.title}/>)
     }
 
-    return bookList()
+    return (
+        <ul>
+            {bookList()}
+        </ul>
+    )
 }
 
-export default BooksContainer
+const mapStateToProps = (state) => {
+    return {books: state.books}
+}
+
+export default connect(mapStateToProps)(BooksContainer)
