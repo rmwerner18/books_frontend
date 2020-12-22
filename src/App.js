@@ -15,7 +15,12 @@ class App extends React.Component {
     return (
       <div className="App">
         <NewBookForm/>
-        <BooksContainer/>
+        <h3>Read:</h3>
+        <BooksContainer status="read"/>
+        <h3>Reading:</h3>
+        <BooksContainer status="reading"/>
+        <h3>To Read:</h3>
+        <BooksContainer status="to_read"/>
       </div>
     );
   }

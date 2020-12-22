@@ -8,7 +8,8 @@ const BooksContainer = props => {
 
 
     let bookList = () => {
-        return props.books.map(book => <Book title={book.title}/>)
+        let filteredBooks = props.books.filter(book => book.status === props.status)
+        return filteredBooks.map(book => <Book key={book.id} book={book} status={props.status}/>)
     }
 
     return (

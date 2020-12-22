@@ -17,7 +17,6 @@ class NewBookForm extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.addBook(this.state)
         fetch('http://localhost:3000/books', {
             method: 'POST',
             headers: {
@@ -27,7 +26,7 @@ class NewBookForm extends React.Component {
             body: JSON.stringify(this.state)
         }).then(resp => resp.json())
         .then(book => {
-            console.log("book", book)
+            this.props.addBook(book)
             this.setState({
                 title: "",
                 author: "",
