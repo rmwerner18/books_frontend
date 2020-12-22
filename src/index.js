@@ -7,7 +7,10 @@ import { createStore } from 'redux'
 // import store from './store'
 import booksReducer from './reducers/books'
 
-let store = createStore(booksReducer) 
+let store = createStore(
+  booksReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 ReactDOM.render(
   <React.StrictMode>
