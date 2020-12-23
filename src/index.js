@@ -5,11 +5,12 @@ import App from './App';
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
 import booksReducer from './reducers/books'
+import { composeWithDevTools } from 'redux-devtools-extension' 
 import thunk from 'redux-thunk'
 
 let store = createStore(
   booksReducer,
-  applyMiddleware(thunk)
+  composeWithDevTools(applyMiddleware(thunk))
 )
 
 ReactDOM.render(

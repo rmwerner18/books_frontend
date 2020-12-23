@@ -1,4 +1,6 @@
 import React from 'react'
+import { deleteBook } from '../actions/delete_book'
+import { connect } from 'react-redux'
 
 const Book = props => {
     const markAsReadHandler = (e) => {
@@ -10,7 +12,15 @@ const Book = props => {
     }
 
     const deleteHandler = (e) => {
-        console.log(e.target.id)
+        return fetch('http://localhost:3000/books/' + e.target.id, {
+            method: 'DELETE',
+            headers: {
+                'content-type': 'application/json',
+                accept: 'application/json'
+            },
+            body: JSON.stringify({id: e.target.id})
+        }).then(resp => resp.json())
+        .then(id => props.deleteBook(id)) 
     }
 
     return (
@@ -25,4 +35,5 @@ const Book = props => {
     )
 }
 
-export default Book
+
+export default connect(null, { deleteBook })(Book)
