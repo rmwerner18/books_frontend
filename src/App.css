@@ -1,1 +1,8 @@
+.books-containers {
+    display: flex;
+    flex-direction: row;
+}
 
+h3 {
+    text-align: center;
+}

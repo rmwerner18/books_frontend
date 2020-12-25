@@ -13,9 +13,12 @@ const BooksContainer = props => {
     }
 
     return (
-        <ul>
-            {bookList()}
-        </ul>
+        <div className='books-container'>
+            <h3>{props.status.toUpperCase()}:</h3>
+            <ul>
+                {bookList()}
+            </ul>
+        </div>
     )
 }
 
