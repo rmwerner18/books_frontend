@@ -1,10 +1,24 @@
 import React from 'react'
 import { deleteBook } from '../actions/delete_book'
+import { editBook } from '../actions/edit_book'
 import { connect } from 'react-redux'
 
 const Book = props => {
     const markAsReadHandler = (e) => {
-        console.log(e.target.id)
+        return fetch('http://localhost:3000/books/' + e.target.id, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                accept: 'application/json'
+            },
+            body: JSON.stringify({
+                id: e.target.id,
+                status: 'read'
+            })
+        }).then(resp => resp.json())
+        .then(book => {
+            props.editBook(book)
+        })
     }
     
     const markAsReadingHandler = (e) => {
@@ -36,4 +50,4 @@ const Book = props => {
 }
 
 
-export default connect(null, { deleteBook })(Book)
+export default connect(null, { deleteBook, editBook })(Book)

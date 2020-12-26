@@ -17,6 +17,11 @@ class NewBookForm extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
+        console.log(this.state)
+        if (this.state.status.length === 0) {
+            alert('please select a status')
+            return 
+        }
         fetch('http://localhost:3000/books', {
             method: 'POST',
             headers: {
@@ -38,9 +43,17 @@ class NewBookForm extends React.Component {
     render() {
         return (
             <form onSubmit={this.submitHandler}>
+                <label>Title</label>
                 <input type='text' name='title' onChange={this.changeHandler} value={this.state.title}/>
+                <label>Author</label>
                 <input type='text' name='author' onChange={this.changeHandler} value={this.state.author}/>
-                <input type='text' name='status' onChange={this.changeHandler} value={this.state.status}/>
+                <label>Read Status</label>
+                <select name='status' id='status' onChange={this.changeHandler} >
+                    <option selected> -- select an option -- </option>
+                    <option value='read'>Read</option>
+                    <option value='reading'>Reading</option>
+                    <option value='to_read'>To Read</option>
+                </select>                
                 <input type='submit'/>
             </form>
         )
