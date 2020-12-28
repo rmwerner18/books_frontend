@@ -4,7 +4,7 @@ import { editBook } from '../actions/edit_book'
 import { connect } from 'react-redux'
 
 const Book = props => {
-    const markAsReadHandler = (e) => {
+    const editHandler = (status, e) => {
         return fetch('http://localhost:3000/books/' + e.target.id, {
             method: 'PATCH',
             headers: {
@@ -13,16 +13,12 @@ const Book = props => {
             },
             body: JSON.stringify({
                 id: e.target.id,
-                status: 'read'
+                status: status
             })
         }).then(resp => resp.json())
         .then(book => {
             props.editBook(book)
         })
-    }
-    
-    const markAsReadingHandler = (e) => {
-        console.log(e.target.id)
     }
 
     const deleteHandler = (e) => {
@@ -41,9 +37,9 @@ const Book = props => {
         <>
             <p>{props.book.title} {props.book.author}</p>
             {props.status === "reading" || props.status === "to_read" ? 
-                <button onClick={markAsReadHandler} id={props.book.id}>Mark as Read</button> : null}
+                <button onClick={(e) => editHandler('read', e)} id={props.book.id}>Mark as Read</button> : null}
             {props.status === "to_read" ? 
-                <button onClick={markAsReadingHandler} id={props.book.id}>Mark as Reading</button> : null}
+                <button onClick={(e) => editHandler('reading', e)} id={props.book.id}>Mark as Reading</button> : null}
             <button onClick={deleteHandler} id={props.book.id}>Delete</button>
         </>
     )

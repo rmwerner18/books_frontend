@@ -1,24 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { addBook } from '../actions/add_book'
 
-class NewBookForm extends React.Component {
-    state = {
-        title: "",
-        author: "",
-        status: ""
-    }
+const NewBookForm = props => {
+    const [title, setTitle] = useState('')
+    const [author, setAuthor] = useState('')
+    const [status, setStatus] = useState('')
 
-    changeHandler = (e) => {
-        this.setState(() => (
-            {[e.target.name]: e.target.value}
-        ))
-    }
-
-    submitHandler = (e) => {
+    const submitHandler = (e) => {
         e.preventDefault()
-        console.log(this.state)
-        if (this.state.status.length === 0) {
+        console.log({title: title, author: author, status: status})
+        if (status.length === 0) {
             alert('please select a status')
             return 
         }
@@ -28,36 +20,29 @@ class NewBookForm extends React.Component {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({title: title, author: author, status: status})
         }).then(resp => resp.json())
         .then(book => {
-            this.props.addBook(book)
-            this.setState({
-                title: "",
-                author: "",
-                status: ""
-            })
+            props.addBook(book)
+            setTitle('')
+            setAuthor('')
+            setStatus('')
         })
     }
 
-    render() {
-        return (
-            <form onSubmit={this.submitHandler}>
-                <label>Title</label>
-                <input type='text' name='title' onChange={this.changeHandler} value={this.state.title}/>
-                <label>Author</label>
-                <input type='text' name='author' onChange={this.changeHandler} value={this.state.author}/>
-                <label>Read Status</label>
-                <select name='status' id='status' onChange={this.changeHandler} >
-                    <option selected> -- select an option -- </option>
-                    <option value='read'>Read</option>
-                    <option value='reading'>Reading</option>
-                    <option value='to_read'>To Read</option>
-                </select>                
-                <input type='submit'/>
-            </form>
-        )
-    }
+    return (
+        <form onSubmit={submitHandler} className='new-book-form'>
+            <input type='text' name='title' onChange={(e) => setTitle(e.target.value)} value={title} placeholder='Title'/><br/>
+            <input type='text' name='author' onChange={(e) => setAuthor(e.target.value)} value={author} placeholder='Author'/><br/>
+            <select name='status' id='status' onChange={(e) => setStatus(e.target.value)} value={status}>
+                <option selected value={''}>-- Select Read Status --</option>
+                <option value='read'>Read</option>
+                <option value='reading'>Reading</option>
+                <option value='to_read'>To Read</option>
+            </select><br/>                
+            <input type='submit'/>
+        </form>
+    )
 }
 
 const mapDispatchToProps = dispatch => {
