@@ -5,8 +5,6 @@ import { addBook } from '../actions/add_book'
 
 
 const BooksContainer = props => {
-
-
     let bookList = () => {
         let filteredBooks = props.books.filter(book => book.status === props.status)
         return filteredBooks.map(book => <Book key={book.id} book={book} status={props.status}/>)

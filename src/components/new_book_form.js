@@ -35,7 +35,7 @@ const NewBookForm = props => {
             <input type='text' name='title' onChange={(e) => setTitle(e.target.value)} value={title} placeholder='Title'/><br/>
             <input type='text' name='author' onChange={(e) => setAuthor(e.target.value)} value={author} placeholder='Author'/><br/>
             <select name='status' id='status' onChange={(e) => setStatus(e.target.value)} value={status}>
-                <option selected value={''}>-- Select Read Status --</option>
+                <option value=''>-- Select Read Status --</option>
                 <option value='read'>Read</option>
                 <option value='reading'>Reading</option>
                 <option value='to_read'>To Read</option>
